@@ -1,13 +1,15 @@
 <%= form_with(model: paste, local: true) do |form| %>
   <% if paste.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(paste.errors.count, "error") %> prohibited this paste from being saved:</h2>
-
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">Alert!</h4>
+      <p><%= pluralize(paste.errors.count, "error") %> prohibited this paste from being saved:</p>
       <ul>
-      <% paste.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% paste.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
+      <hr>
+      <p class="mb-0">You must enter valid information before you can continue.</p>
     </div>
   <% end %>
 
