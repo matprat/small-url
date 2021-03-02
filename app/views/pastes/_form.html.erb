@@ -1,29 +1,29 @@
-<%= form_with(model: paste, local: true) do |form| %>
-  <% if paste.errors.any? %>
-    <div class="alert alert-danger" role="alert">
-      <h4 class="alert-heading">Alert!</h4>
-      <p><%= pluralize(paste.errors.count, "error") %> prohibited this paste from being saved:</p>
-      <ul>
-        <% paste.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-      <hr>
-      <p class="mb-0">You must enter valid information before you can continue.</p>
+<%= form_with(model: paste, local: true) do |f| %>
+  <div class="row">
+    <div class="col-lg-12">
+      <%= render partial: 'form_errors', locals: { resource: paste } %>
     </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= form.label :expiration_length_in_minutes %>
-    <%= form.number_field :expiration_length_in_minutes, class: 'form-control' %>
   </div>
-  <div class="form-group">
-    <%= form.label :content %>
-    <%= form.text_area :content, class: 'form-control', rows: 25 %>
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="form-group">
+        <%= f.label 'Expiration' %>
+        <%= f.select :expiration_length_in_minutes, options_for_select(options_for_expiration_length_in_minutes, selected: (@select_param if @select_param.present?)), { include_blank: 'Select...' }, class: 'custom-select form-control' %>
+      </div>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= form.submit class: "btn btn-primary" %>
-    <%= link_to 'Cancelar', root_path, class: 'btn btn-light', role: 'button' %>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <%= f.label :content %>
+        <%= f.text_area :content, class: 'form-control', rows: 25 %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <%= f.submit class: "btn btn-primary" %>
+      <%= link_to 'Cancelar', root_path, class: 'btn btn-light', role: 'button' %>
+    </div>
   </div>
 <% end %>

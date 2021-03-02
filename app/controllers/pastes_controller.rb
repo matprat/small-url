@@ -1,5 +1,6 @@
 class PastesController < ApplicationController
   before_action :set_paste, only: [ :show, :destroy ]
+  before_action :get_params_to_select_field, only: [:create]
 
   # GET /pastes or /pastes.json
   def index
@@ -65,5 +66,9 @@ class PastesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def paste_params
       params.require(:paste).permit(:expiration_length_in_minutes, :content)
+    end
+
+    def get_params_to_select_field
+      @select_param = paste_params[:expiration_length_in_minutes]
     end
 end

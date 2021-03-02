@@ -1,0 +1,13 @@
+<% if resource.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">Alert!</h4>
+    <p><%= pluralize(resource.errors.count, "error") %> prohibited this <%= resource.class.name.downcase %> from being saved:</p>
+    <ul>
+      <% resource.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+    <hr>
+    <p class="mb-0">You must enter valid information before you can continue.</p>
+  </div>
+<% end %>
